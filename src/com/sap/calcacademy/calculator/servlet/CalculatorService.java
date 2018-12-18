@@ -40,7 +40,7 @@ public class CalculatorService {
         JSONObject jsonObject = new JSONObject();
         Number res = results.get(i);
         jsonObject.put("Here is the value: ", res); 
-        String result = "@Produces(\"application/json\") Output: INITIAL OUT FROM PATH VAR: \n\n" + jsonObject.toString();
+        String result = "@Produces(\"application/json\") Result: \n\n" + jsonObject.toString();
         return Response.status(200).entity(result).build();
     }
     
