@@ -1,6 +1,6 @@
 package com.sap.calcacademy.calculator.exceptions;
 
-public class CalculationException extends RuntimeException {
+public class CalculationException extends Exception {
     /**
      * Default serialization ID
      */
