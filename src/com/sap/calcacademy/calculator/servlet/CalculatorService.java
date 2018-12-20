@@ -21,7 +21,7 @@ import com.sap.calcacademy.calculator.exceptions.CalculationException;
 
 public class CalculatorService<syncronized> {
     
-    private int count = 0;
+    private static int count =0;
     private static HashMap<Integer, Number> results = new HashMap<>(); //to be unique - sessionID? 
     
     @GET
@@ -37,6 +37,7 @@ public class CalculatorService<syncronized> {
         Number res = results.get(resultID);
         Result result = new Result();
         result.setResult(res);
+        result.setResultID(resultID);
         Gson gson = new Gson();
         String json = gson.toJson(result);
         return Response.status(200).entity(json).build();
@@ -47,9 +48,9 @@ public class CalculatorService<syncronized> {
     @Consumes(MediaType.WILDCARD)
     @Produces("application/json")
     public Response submit(String s) throws IllegalArgumentException, CalculationException {
-        Expression em = new Expression(s, getResultID(s));
+        Expression expression = new Expression(s, getResultID(s));
         Gson gson = new Gson();
-        String json = gson.toJson(em);
+        String json = gson.toJson(expression); //TODO - fromJson
         return Response.status(200).entity(json).build();
     }
     
