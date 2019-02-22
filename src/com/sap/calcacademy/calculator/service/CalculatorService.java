@@ -1,4 +1,4 @@
-package com.sap.calcacademy.calculator.servlet;
+package com.sap.calcacademy.calculator.service;
 
 import java.util.HashMap;
 
@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 import com.sap.calcacademy.calculator.*;
 import com.sap.calcacademy.calculator.exceptions.CalculationException;
 
-@Path("/result")
+@Path("/")
 
 public class CalculatorService<syncronized> {
     
@@ -30,7 +30,16 @@ public class CalculatorService<syncronized> {
         return Response.status(200).entity(null).build();
     }
     
-    @Path("{resultID}")
+    @Path("/history")
+    @GET
+    @Produces("application/json")
+    public Response getResultHistory() throws JSONException {
+        Gson gson = new Gson();
+        String json = gson.toJson(results);
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        }
+    
+    @Path("/result/{resultID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getResult(@PathParam("resultID") Integer resultID) throws JSONException {
@@ -50,7 +59,7 @@ public class CalculatorService<syncronized> {
     public Response submit(String s) throws IllegalArgumentException, CalculationException {
         Expression expression = new Expression(s, getResultID(s));
         Gson gson = new Gson();
-        String json = gson.toJson(expression); //TODO - fromJson
+        String json = gson.toJson(expression); 
         return Response.status(200).entity(json).build();
     }
     

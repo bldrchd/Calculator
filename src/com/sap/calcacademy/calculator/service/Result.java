@@ -1,4 +1,4 @@
-package com.sap.calcacademy.calculator.servlet;
+package com.sap.calcacademy.calculator.service;
 
 public class Result {
     
